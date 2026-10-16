@@ -5,7 +5,13 @@ by `Link.ps1`. This is the Windows counterpart to
 [`.dotfiles`](https://github.com/PcKiLl3r/.dotfiles) -- system-level
 provisioning lives in the separate
 [`windows-setup`](https://github.com/PcKiLl3r/windows-setup) repo; this
-repo only links config into `$HOME`.
+repo only links config into `$HOME`. `windows-setup/boot.ps1` clones this
+repo automatically, so normal use is the one-liner in that repo's
+README, not anything here directly.
+
+**Public** (unlike `.dotfiles`, which is private) -- holds no secrets, and
+public is what lets `windows-setup`'s one-command bootstrap clone it with
+zero credentials on a fresh machine.
 
 ```powershell
 ./run.ps1                      # link the "windows" preset

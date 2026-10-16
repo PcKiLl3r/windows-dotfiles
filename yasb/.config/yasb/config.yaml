@@ -3,17 +3,33 @@
 # a Windows equivalent exists. Dropped with no equivalent: omarchy.agents,
 # omarchy.system-update (no Windows update-check widget worth adding),
 # OSD (handled natively by Windows volume/brightness overlays).
+#
+# Verified against https://docs.yasb.dev and
+# https://raw.githubusercontent.com/amnweb/yasb-themes/main/themes/83e8a5f3-45d4-4ba1-8b2c-b97871cde018/config.yaml
+# (an earlier draft of this file had the komorebi widget types wrong and
+# was missing required top-level keys -- see windows-setup plan history).
+watch_stylesheet: true
+watch_config: true
+debug: false
+
+komorebi:
+  start_command: "komorebic start --whkd --config \"$HOME/.config/komorebi/komorebi.json\""
+  stop_command: "komorebic stop --whkd"
+  reload_command: "komorebic stop --whkd && komorebic start --whkd --config \"$HOME/.config/komorebi/komorebi.json\""
+
 bars:
   omarchy:
+    enabled: true
     screens: ["*"]
     class_name: "yasb-bar"
     alignment:
       position: "top"
-      center: true
     blur_effect:
       enabled: false
     window_flags:
       always_on_top: false
+      windows_app_bar: true      # reserves screen space so komorebi tiles below the bar instead of under it
+      hide_on_fullscreen: true   # lets fullscreen games (Steam/Battle.net) take the whole screen
     dimensions:
       width: "100%"
       height: 32
@@ -35,13 +51,12 @@ widgets:
       exec_cmd: "Flow.Launcher.exe"
 
   komorebi_workspaces:
-    type: "yasb.komorebi.workspaces.WorkspaceWidget"
+    type: "komorebi.workspaces.WorkspaceWidget"
     options:
       hide_empty_workspaces: false
-      show_workspace_names: true
 
   komorebi_layout:
-    type: "yasb.komorebi.active_layout.ActiveLayoutWidget"
+    type: "komorebi.active_layout.ActiveLayoutWidget"
 
   clock:
     type: "yasb.clock.ClockWidget"
@@ -57,8 +72,6 @@ widgets:
     type: "yasb.weather.WeatherWidget"
     options:
       update_interval: 1800
-      weather_card:
-        update_interval: 1800
 
   systray:
     type: "yasb.systray.SystrayWidget"
