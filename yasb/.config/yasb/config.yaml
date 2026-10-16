@@ -1,0 +1,86 @@
+# YASB bar config -- mirrors the three-section layout of
+# ~/.config/omarchy/shell.json (left/center/right), module-for-module where
+# a Windows equivalent exists. Dropped with no equivalent: omarchy.agents,
+# omarchy.system-update (no Windows update-check widget worth adding),
+# OSD (handled natively by Windows volume/brightness overlays).
+bars:
+  omarchy:
+    screens: ["*"]
+    class_name: "yasb-bar"
+    alignment:
+      position: "top"
+      center: true
+    blur_effect:
+      enabled: false
+    window_flags:
+      always_on_top: false
+    dimensions:
+      width: "100%"
+      height: 32
+    padding:
+      top: 0
+      left: 0
+      bottom: 0
+      right: 0
+    widgets:
+      left: ["launcher_button", "komorebi_workspaces"]
+      center: ["clock", "komorebi_layout", "language", "weather"]
+      right: ["systray", "bluetooth", "wifi", "volume", "cpu", "memory", "battery"]
+
+widgets:
+  launcher_button:
+    type: "yasb.custom.CustomWidget"
+    options:
+      label: "<span></span>"   # matches omarchy.menu icon slot
+      exec_cmd: "Flow.Launcher.exe"
+
+  komorebi_workspaces:
+    type: "yasb.komorebi.workspaces.WorkspaceWidget"
+    options:
+      hide_empty_workspaces: false
+      show_workspace_names: true
+
+  komorebi_layout:
+    type: "yasb.komorebi.active_layout.ActiveLayoutWidget"
+
+  clock:
+    type: "yasb.clock.ClockWidget"
+    options:
+      label: "{%A %H:%M}"               # matches shell.json's "dddd HH:mm"
+      label_alt: "{%-d %B W%V %Y}"      # matches shell.json alt format
+      update_interval: 1000
+
+  language:
+    type: "yasb.language.LanguageWidget"
+
+  weather:
+    type: "yasb.weather.WeatherWidget"
+    options:
+      update_interval: 1800
+      weather_card:
+        update_interval: 1800
+
+  systray:
+    type: "yasb.systray.SystrayWidget"
+
+  bluetooth:
+    type: "yasb.bluetooth.BluetoothWidget"
+
+  wifi:
+    type: "yasb.wifi.WifiWidget"
+
+  volume:
+    type: "yasb.volume.VolumeWidget"
+
+  cpu:
+    type: "yasb.cpu.CpuWidget"
+    options:
+      update_interval: 2000
+
+  memory:
+    type: "yasb.memory.MemoryWidget"
+    options:
+      update_interval: 2000
+
+  battery:
+    type: "yasb.battery.BatteryWidget"

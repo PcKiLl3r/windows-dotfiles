@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi-application-specific-configuration/master/schema.json",
+  "_comment": "Starter float/ignore rules for games + launchers, so komorebi never tries to tile Steam, Battle.net, or game windows. komorebi ships a much larger community-maintained list at https://github.com/LGUG2Z/komorebi-application-specific-configuration/blob/master/applications.json -- steps/70-dotfiles.ps1's README notes fetching it; this file is the minimal subset this setup actually needs, kept local and dependency-free rather than vendoring the whole upstream list blind.",
+  "float_identifiers": [
+    { "kind": "Exe", "id": "steamwebhelper.exe", "comment": "Steam's embedded browser chrome" }
+  ],
+  "ignore_identifiers": [
+    { "kind": "Exe", "id": "steam.exe", "comment": "Steam main window + games it launches go fullscreen/borderless and bypass the WM anyway" },
+    { "kind": "Exe", "id": "Battle.net.exe", "comment": "Battle.net launcher" },
+    { "kind": "Exe", "id": "Agent.exe", "comment": "Battle.net background agent" }
+  ]
+}

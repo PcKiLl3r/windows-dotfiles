@@ -1,0 +1,21 @@
+# Hand-written config; colors section is generated separately into
+# colors.toml by bin/Build-Theme.ps1 and imported below, same pattern as
+# the Omarchy alacritty.toml this is based on (~/.dotfiles/alacritty/.config/alacritty/alacritty.toml).
+general.import = ["~/.config/alacritty/colors.toml"]
+
+[font]
+size = 11.0
+
+[font.normal]
+family = "CaskaydiaCove Nerd Font"
+
+[window]
+padding = { x = 8, y = 8 }
+decorations = "full"
+opacity = 0.98
+
+[scrolling]
+history = 10000
+
+[cursor]
+style = { shape = "Beam", blinking = "On" }

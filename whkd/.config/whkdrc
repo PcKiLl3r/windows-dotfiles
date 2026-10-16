@@ -1,0 +1,130 @@
+# whkd config -- translation of the Omarchy/Hyprland bindings into
+# komorebic calls and app launches. Source bindings:
+#   ~/.dotfiles/hypr/.config/hypr/bindings.lua (personal overrides)
+#   ~/.local/share/omarchy/default/hypr/bindings/{tiling,utilities,applications,media,clipboard}.lua
+#   `omarchy menu keybindings --print` (live, authoritative dump)
+#
+# Modifier mapping: SUPER->win, SHIFT->shift, ALT->alt, CTRL->ctrl.
+#
+# NOTE on keyboard layout: whkd resolves key names through the ACTIVE
+# layout. These binds were written assuming US QWERTY key *positions*.
+# If Real Programmer Dvorak is active and win+h stops focusing left,
+# move the affected lines into ahk/.config/ahk/omarchy.ahk, which can
+# bind by scancode instead -- see windows-setup/keyboard/README.md.
+
+.shell pwsh
+
+# --- Apps & launchers (applications.lua) --------------------------------
+win + return                     : alacritty
+win + alt + return                : alacritty -e tmux
+win + shift + return              : start firefox
+win + shift + alt + b             : start firefox -private-window
+win + shift + f                   : explorer %userprofile%
+win + shift + n                   : code
+win + d                           : Flow.Launcher.exe                 # ex-walker muscle memory, see windows-setup README
+win + y                           : start %userprofile%\todo.md       # todo-menu script not ported; opens the file directly
+win + shift + w                   : typora
+win + shift + t                   : alacritty -e btop4win
+win + ctrl + t                    : alacritty -e btop4win
+win + shift + m                   : start spotify
+win + shift + d                   : alacritty -e docker
+win + shift + g                   : start signal
+win + shift + o                   : start obsidian
+win + shift + oem_2               : start 1password                   # SUPER+SHIFT+/ -> passwords
+win + shift + a                   : start firefox --new-window "https://chat.openai.com"
+win + shift + alt + a             : start firefox --new-window "https://grok.com"
+win + shift + c                   : start firefox --new-window "https://app.hey.com/calendar"
+win + shift + e                   : start firefox --new-window "https://app.hey.com"
+win + shift + alt + e             : start firefox --new-window "https://app.hey.com/compose"
+win + shift + y                   : start firefox --new-window "https://youtube.com"
+win + shift + alt + g             : start firefox --new-window "https://web.whatsapp.com"
+win + shift + ctrl + g            : start firefox --new-window "https://messages.google.com"
+win + shift + p                   : start firefox --new-window "https://photos.google.com"
+win + shift + s                   : start firefox --new-window "https://maps.google.com"
+win + shift + x                   : start firefox --new-window "https://x.com"
+win + shift + alt + x             : start firefox --new-window "https://x.com/compose/post"
+
+# --- Menus & panels (utilities.lua) -- Flow Launcher / ms-settings approximations
+win + space                       : Flow.Launcher.exe
+win + alt + space                 : Flow.Launcher.exe
+win + n                           : start ms-settings:network
+win + a                           : start ms-settings:sound
+win + b                           : start ms-settings:bluetooth
+win + ctrl + n                    : start ms-settings:nightlight
+win + ctrl + w                    : start ms-settings:network
+win + ctrl + d                    : start ms-settings:display
+win + ctrl + p                    : start ms-settings:powersleep
+
+# --- Window / tiling (tiling.lua) ---------------------------------------
+win + w                           : komorebic close
+win + t                           : komorebic toggle-float
+win + f                           : komorebic toggle-monocle
+win + ctrl + f                    : komorebic toggle-monocle
+win + alt + f                     : komorebic toggle-maximize
+win + o                           : komorebic toggle-float ; komorebic toggle-always-on-top
+win + g                           : komorebic toggle-pause                    # no direct "toggle grouping" verb; pausing stops layout churn while arranging a stack
+win + alt + g                     : komorebic unstack
+
+# --- Focus & move (vim-style, bindings.lua ★ overrides, J/K INTENTIONALLY INVERTED) ---
+win + h                           : komorebic focus left
+win + l                           : komorebic focus right
+win + j                           : komorebic focus up          # matches the user's inverted override, not the usual vim convention
+win + k                           : komorebic focus down         # matches the user's inverted override, not the usual vim convention
+win + shift + h                   : komorebic move left
+win + shift + l                   : komorebic move right
+win + shift + j                   : komorebic move down
+win + shift + k                   : komorebic move up
+win + left                        : komorebic focus left
+win + right                       : komorebic focus right
+win + up                          : komorebic focus up
+win + down                        : komorebic focus down
+win + shift + left                : komorebic move left
+win + shift + right               : komorebic move right
+win + shift + up                  : komorebic move up
+win + shift + down                : komorebic move down
+ctrl + alt + tab                  : komorebic cycle-monitor next
+ctrl + alt + shift + tab          : komorebic cycle-monitor previous
+
+# --- Resize (tiling.lua) -------------------------------------------------
+win + minus                       : komorebic resize-axis horizontal decrease
+win + equal                       : komorebic resize-axis horizontal increase
+win + shift + minus                : komorebic resize-axis vertical decrease
+win + shift + equal                : komorebic resize-axis vertical increase
+
+# --- Workspaces & monitors (tiling.lua) ----------------------------------
+win + 1                           : komorebic focus-workspace 0
+win + 2                           : komorebic focus-workspace 1
+win + 3                           : komorebic focus-workspace 2
+win + 4                           : komorebic focus-workspace 3
+win + 5                           : komorebic focus-workspace 4
+win + 6                           : komorebic focus-workspace 5
+win + 7                           : komorebic focus-workspace 6
+win + 8                           : komorebic focus-workspace 7
+win + 9                           : komorebic focus-workspace 8
+win + 0                           : komorebic focus-workspace 9    # dedicated scratchpad workspace (no komorebi scratchpad verb) -- see win+s below
+win + shift + 1                   : komorebic move-to-workspace 0
+win + shift + 2                   : komorebic move-to-workspace 1
+win + shift + 3                   : komorebic move-to-workspace 2
+win + shift + 4                   : komorebic move-to-workspace 3
+win + shift + 5                   : komorebic move-to-workspace 4
+win + shift + 6                   : komorebic move-to-workspace 5
+win + shift + 7                   : komorebic move-to-workspace 6
+win + shift + 8                   : komorebic move-to-workspace 7
+win + shift + 9                   : komorebic move-to-workspace 8
+win + shift + 0                   : komorebic move-to-workspace 9
+win + tab                         : komorebic cycle-workspace next
+win + shift + tab                  : komorebic cycle-workspace previous
+win + ctrl + tab                   : komorebic focus-last-workspace
+win + s                           : komorebic focus-workspace 9    # scratchpad stand-in: workspace 10 is a dedicated always-there holding area
+win + alt + s                     : komorebic move-to-workspace 9
+win + alt + h                     : komorebic cycle-move-workspace-to-monitor previous
+win + alt + l                     : komorebic cycle-move-workspace-to-monitor next
+
+# --- Clipboard (clipboard.lua) -- SUPER+C/V/X dropped, native Ctrl covers them
+win + ctrl + v                    : start ms-settings:clipboard   # closest native equivalent to the Omarchy clipboard-manager panel (Win+V also works natively)
+
+# --- Toggles & lock (utilities.lua) --------------------------------------
+win + ctrl + l                    : rundll32 user32.dll,LockWorkStation
+win + shift + space                : yasbc toggle
+win + backspace                   : komorebic toggle-transparency
+win + shift + backspace            : komorebic toggle-workspace-padding

@@ -1,0 +1,17 @@
+{
+  "_comment": "Closest Flow Launcher settings to Omarchy's app launcher behavior. whkd's `win + d` launches Flow.Launcher.exe directly (the running instance toggles its own window), so Hotkey here is a redundant native fallback, not the primary binding.",
+  "Hotkey": "LWin + D",
+  "Language": "en",
+  "Theme": "Dark",
+  "ShouldUsePinyin": false,
+  "LastQueryMode": "Empty",
+  "SearchPrecisionScore": 50,
+  "ShowOpenResultHotkey": "Enter",
+  "DontPromptUpdateMsg": false,
+  "KeepMaxResults": 5,
+  "AutoUpdates": true,
+  "SearchWindowScreen": "Cursor",
+  "SearchWindowAlign": "Center",
+  "ShowYesNoSelectorForUpdate": true,
+  "AlwaysPreview": false
+}

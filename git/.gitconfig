@@ -1,0 +1,39 @@
+# Mirrors the behavior settings from ~/.gitconfig on the Omarchy machine
+# (rerere, rebase-on-pull, autoSetupRemote, delta pager, histogram diff).
+# user.email left out deliberately -- set locally, not committed to a
+# shared dotfiles repo.
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential
+[user]
+	name = Grega Zorko
+[alias]
+	rename = branch -m
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+[rerere]
+	enabled = true
+	autoupdate = true
+[rebase]
+	autoStash = false
+[init]
+	defaultBranch = master
+[pull]
+	rebase = true
+[push]
+	autoSetupRemote = true
+[core]
+	pager = delta
+	autocrlf = input
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	line-numbers = true
+[diff]
+	algorithm = histogram
